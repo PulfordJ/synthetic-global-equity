@@ -1,0 +1,59 @@
+{
+  "name": "Synthetic Global Equity",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/nix:1": {
+      "version": "latest",
+      "multiUser": true
+    }
+  },
+  "mounts": [
+    // Claude credentials and config (tokens, settings, memory)
+    "source=${localEnv:HOME}/.claude,target=/root/.claude,type=bind,consistency=cached",
+    // Claude auth state (oauth account + session token - stored outside the .claude dir)
+    "source=${localEnv:HOME}/.claude.json,target=/root/.claude.json,type=bind,consistency=cached",
+    // Host git identity (name, email, aliases)
+    "source=${localEnv:HOME}/.gitconfig,target=/root/.gitconfig,type=bind,consistency=cached",
+    // Host SSH keys (for git push over SSH)
+    "source=${localEnv:HOME}/.ssh,target=/root/.ssh,type=bind,consistency=cached"
+  ],
+  "workspaceFolder": "/workspace",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+  "remoteEnv": {
+    "NIX_CONFIG": "experimental-features = nix-command flakes",
+    "PYTHONUNBUFFERED": "1"
+  },
+  // Ensure host files exist before Docker bind-mounts them (missing file → Docker creates a dir, breaking auth)
+  "initializeCommand": "mkdir -p ${HOME}/.claude ${HOME}/.ssh && touch ${HOME}/.claude.json ${HOME}/.gitconfig",
+  "postCreateCommand": "nix develop .#bootstrap --command bash -c 'uv sync && bash .devcontainer/post-create.sh'",
+  "overrideCommand": false,
+  "runArgs": ["--add-host=host.docker.internal:host-gateway"],
+  "remoteUser": "root",
+  "forwardPorts": [8888],
+  "portsAttributes": {
+    "8888": { "label": "Jupyter", "onAutoForward": "openPreview" }
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "python.defaultInterpreterPath": "/workspace/.venv/bin/python",
+        "python.terminal.activateEnvironment": true,
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "jupyter.notebookFileRoot": "/workspace",
+        "jupyter.kernels.filter": [
+          { "path": "/workspace/.venv/bin/python", "type": "pythonEnvironment" }
+        ]
+      },
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-toolsai.jupyter",
+        "ms-toolsai.vscode-jupyter-slideshow",
+        "charliermarsh.ruff",
+        "jnoortheen.nix-ide"
+      ]
+    }
+  }
+}

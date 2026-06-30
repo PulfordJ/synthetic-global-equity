@@ -1,0 +1,19 @@
+[project]
+name = "synthetic-global-equity"
+version = "0.1.0"
+description = "Synthetic FTSE All-World index back-extended to December 1969 using MSCI ACWI and MSCI World proxies"
+requires-python = ">=3.11"
+dependencies = [
+    "numpy>=2.0.0",
+    "pandas>=2.2.0",
+    "jupyter>=1.0.0",
+    "notebook>=7.0.0",
+    "matplotlib>=3.10.8",
+    "scipy>=1.15.2",
+    "seaborn>=0.13.2",
+    "ipykernel>=6.0.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
