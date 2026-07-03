@@ -35,3 +35,6 @@ result-*
 
 # Logs
 *.log
+
+# Supplementary data files not used in analysis
+JSTdatasetR6*.xlsx
