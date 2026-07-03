@@ -1,10 +1,8 @@
 # Synthetic FTSE All-World Index (Dec 1969 – present)
 
-A monthly total-return equity index back-extended to December 1969 by chain-linking three publicly available index series.
+What if you bought the closest thing to FTSE All-World since 1969?
 
-## Background
-
-The [FTSE All-World Index](https://curvo.eu/backtest/en/market-index/ftse-all-world?currency=gbp) — a broad global equity benchmark covering developed and emerging markets — only has data from September 2003. This project extends it back to December 1969 using two earlier proxies, producing a continuous 55+ year series useful for long-run return analysis and portfolio backtesting.
+The [FTSE All-World Index](https://curvo.eu/backtest/en/market-index/ftse-all-world?currency=gbp) — a broad global equity benchmark covering developed and emerging markets — only has data from September 2003. This project answers that question by extending it back to December 1969 using the best available proxy for each era, producing a continuous 55+ year monthly series useful for long-run return analysis and portfolio backtesting.
 
 ## Methodology
 
