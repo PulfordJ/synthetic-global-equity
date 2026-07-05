@@ -37,6 +37,7 @@ Raw CSVs are included in [`data/`](data/).
 | `data/synthetic_ftse_all_world.csv` | Monthly index levels (MM/YYYY, rebased to 10,000 at Dec 1969) |
 | `data/synthetic_ftse_all_world_annual.csv` | December year-end levels |
 | `data/synthetic_ftse_all_world_annual_returns.csv` | Calendar-year percentage returns (1970–2025) — compatible with Portfolio Charts asset toolkit |
+| `data/synthetic_ftse_all_world_monthly_returns.csv` | Monthly percentage returns (Jan 1970 onward) — consumed by the `withdrawal-rates` sibling repo |
 
 ## Usage
 
